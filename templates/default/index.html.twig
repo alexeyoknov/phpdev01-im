@@ -3,8 +3,11 @@
 {% block title %} Wellcome {% endblock %}
 
 {% block body %}
-
-Hello world! {{ number }}<br>
-My name is {{ name }}
-    
+<ul>
+    {% for category in categories %}
+        <li>
+            <a href={{ path('category', {id:category.id}) }}>{{ category.name }}</a>
+        </li>
+    {% endfor %}
+</ul> 
 {% endblock %}
