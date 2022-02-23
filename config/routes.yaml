@@ -3,5 +3,9 @@ index:
     controller: App\Controller\DefaultController::homepage
 
 category:
-    path: /katalog-{id}
+    path: /catalog-{id}
     controller: App\Controller\DefaultController::category
+
+product:
+    path: /product-{id}
+    controller: App\Controller\DefaultController::product

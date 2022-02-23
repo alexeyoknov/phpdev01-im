@@ -1,13 +1,21 @@
 {% extends "base.html.twig" %}
 
+{% use "default/leftsidebar.html.twig" %}
+
 {% block title %} Wellcome {% endblock %}
 
 {% block body %}
-<ul>
     {% for category in categories %}
-        <li>
-            <a href={{ path('category', {id:category.id}) }}>{{ category.name }}</a>
-        </li>
-    {% endfor %}
-</ul> 
+    
+        <div class="col-md-6">
+            <a href={{ path('category', {id:category.id}) }}>{{ category.name }} [{{category.products|length}}]</a>
+            {% if category.products|length > 0 %}
+            <ul>
+                {% for product in category.products %}
+                    <li> <a href={{ path('product', {id:product.id}) }}>{{ product.name }}</a> </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    {% endfor %} 
 {% endblock %}
