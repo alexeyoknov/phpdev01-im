@@ -10,32 +10,22 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-final class ProductAdmin extends AbstractAdmin
+final class ImSettingsAdmin extends AbstractAdmin
 {
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('id')
-            ->add('name')
-            ->add('Description')
-            //->add('Category')
-            ->add('created')
-            ->add('updated')
-            ->add('active')
+            ->add('useNestedTable')
             ;
     }
 
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->add('id')
-            ->add('name')
-            ->add('Description')
-            ->add('Category')
-            ->add('created')
-            ->add('updated')
-            ->add('active')
+            //->add('id')
+            ->add('useNestedTable')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -49,12 +39,7 @@ final class ProductAdmin extends AbstractAdmin
     {
         $form
             //->add('id')
-            ->add('name')
-            ->add('Description')
-            ->add('Category')
-            //->add('created')
-            //->add('updated')
-            ->add('active')
+            ->add('useNestedTable')
             ;
     }
 
@@ -62,12 +47,7 @@ final class ProductAdmin extends AbstractAdmin
     {
         $show
             ->add('id')
-            ->add('name')
-            ->add('Description')
-            ->add('Category')
-            ->add('created')
-            ->add('updated')
-            ->add('active')
+            ->add('useNestedTable')
             ;
     }
 }

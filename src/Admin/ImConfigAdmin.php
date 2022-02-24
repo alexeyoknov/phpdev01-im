@@ -9,8 +9,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-final class ProductAdmin extends AbstractAdmin
+final class ImConfigAdmin extends AbstractAdmin
 {
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
@@ -18,24 +19,20 @@ final class ProductAdmin extends AbstractAdmin
         $filter
             ->add('id')
             ->add('name')
-            ->add('Description')
-            //->add('Category')
-            ->add('created')
-            ->add('updated')
-            ->add('active')
+            ->add('category')
+            ->add('type')
+            ->add('value')
             ;
     }
 
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->add('id')
+            //->add('id')
             ->add('name')
-            ->add('Description')
-            ->add('Category')
-            ->add('created')
-            ->add('updated')
-            ->add('active')
+            ->add('category')
+            ->add('type')
+            ->add('value')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -50,24 +47,20 @@ final class ProductAdmin extends AbstractAdmin
         $form
             //->add('id')
             ->add('name')
-            ->add('Description')
-            ->add('Category')
-            //->add('created')
-            //->add('updated')
-            ->add('active')
+            ->add('category')
+            ->add('type',CheckboxType::class,['label'    => 'Show this entry publicly?'])
+            ->add('value')
             ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
     {
         $show
-            ->add('id')
+            //->add('id')
             ->add('name')
-            ->add('Description')
-            ->add('Category')
-            ->add('created')
-            ->add('updated')
-            ->add('active')
+            ->add('category')
+            ->add('type',CheckboxType::class,['label'    => 'Show this entry publicly?'])
+            ->add('value')
             ;
     }
 }

@@ -5,3 +5,10 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+            tree: true
+        #mappings:
+        #    tree:
+        #        type: annotation # or attribute
+        #        alias: Gedmo
+        #        prefix: Gedmo\Tree\Entity
+        #        dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Tree/Entity"

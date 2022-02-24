@@ -40,5 +40,31 @@ services:
     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
         arguments:
             - '%env(DATABASE_URL)%'
-            
-        
+
+    admin.im_config:
+        class: App\Admin\ImConfigAdmin
+        arguments: [~, App\Entity\ImConfig, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ImConfig }
+        public: true
+
+    admin.category_nested:
+        class: App\Admin\CategoryNestedAdmin
+        arguments: [~, App\Entity\CategoryNested, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CategoryNested }
+        public: true
+
+    admin.product_nested:
+        class: App\Admin\ProductNestedAdmin
+        arguments: [~, App\Entity\ProductNested, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ProductNested }
+        public: true
+
+    admin.im_settings:
+        class: App\Admin\ImSettingsAdmin
+        arguments: [~, App\Entity\ImSettings, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ImSettings }
+        public: true
