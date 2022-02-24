@@ -36,3 +36,9 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Product }
         public: true
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(DATABASE_URL)%'
+            
+        
