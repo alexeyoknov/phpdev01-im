@@ -23,7 +23,7 @@ class DefaultController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $cr = $em->getRepository('App:ImSettings')->findOneById(null);
-        $this->tableType = $cr->getUseNestedTable();
+        $this->tableType = $cr ? $cr->getUseNestedTable() : 0;
         return self::tableClassTypes[$this->tableType];
     }
 
