@@ -63,8 +63,6 @@ SERVER_PATH=$(dirname $(dirname $(dirname "${SCRIPT_PATH}")))
 
 DIST=$(cat /etc/os-release | grep '^ID_LIKE' | head -n1  | sed -e 's/"//g' -e 's/\ .*//' | awk -F=  '{ print $2 }')
 
-
-
 cd "${SERVER_PATH}" || exit
 
 if [ -z "${COMPOSER}" ]; then
