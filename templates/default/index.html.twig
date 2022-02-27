@@ -31,18 +31,7 @@
             {{ render(controller(
                 'App\\Controller\\DefaultController::getProducts',{'categoryId':category.id}))
             }}
-            {#
 
-            
-            {% if category.products and category.products|length > 0 %}
-            <ul>
-                {% for product in category.products %}
-                    <li> <a href={{ path('product', {id:product.id}) }}>{{ product.name }}</a> </li>
-                {% endfor %}
-            </ul>
-            
-            {% endif %}
-            #}
         </div>
         {% endif %}
     {% endfor %} 
