@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\CategoryNested;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
  * @method CategoryNested|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,14 +19,14 @@ class CategoryNestedRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CategoryNested::class);
     }
-
+    
+    /**
+     * @return CategoryNested[] Returns an array of CategoryNested objects
+     */
     public function findAll()
     {
-        return $this->createQueryBuilder('c')
-            ->orderBy('c.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy([],['root'=>'ASC','lft'=>'ASC']);
+
     }
 
     // /**

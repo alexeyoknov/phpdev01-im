@@ -8,16 +8,17 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use App\Repository\CategoryNestedRepository;
 
 /**
  * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="category_nested")
- * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryNestedRepository")
  */
 #[Gedmo\Tree(type: 'nested')]
 #[ORM\Table(name: 'category_nested')]
-#[ORM\Entity(repositoryClass: NestedTreeRepository::class)]
-class CategoryNested// extends NestedTreeRepository
+#[ORM\Entity(repositoryClass: CategoryNestedRepository::class)]
+class CategoryNested 
 {
     /**
      * @var int|null
@@ -85,11 +86,11 @@ class CategoryNested// extends NestedTreeRepository
      * @var self|null
      *
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="CategoryNested", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="CategoryNested", inversedBy="Children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     #[Gedmo\TreeParent]
-    #[ORM\ManyToOne(targetEntity: CategoryNested::class, inversedBy: 'children')]
+    #[ORM\ManyToOne(targetEntity: CategoryNested::class, inversedBy: 'Children')]
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private $Parent;
 
@@ -236,11 +237,13 @@ class CategoryNested// extends NestedTreeRepository
         return $this->lvl;
     }
 
+    
     /**
      * @return Collection<int, self>
      */
-    public function getChildren(): Collection
+/*     public function getChildren(): Collection
     {
         return $this->Children;
-    }
+    } */
+
 }

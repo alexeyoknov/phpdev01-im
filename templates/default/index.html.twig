@@ -5,23 +5,34 @@
 {% block title %} Wellcome {% endblock %}
 
 {% block body %}
-    
     {% for category in categories %}
+        {% if category.id != "" %}
         <div class="col-md-6">
             <a href={{ path('category', {id:category.id}) }}>
-                
-                {% if category.getParent() %}
-                    {{ category.getParent().name }}/
+                {% if type == 'nested' %}
+                    {% if category.getParent() %}
+                        {{ category.getParent().getName() }}/
+                    {% endif %}
+                {% else %}
+                    {% if category.parentName %}
+                        {{ category.parentName }}/
+                    {% endif %}
                 {% endif %}
                 
                 {{ category.name }}
         
                 {% if type == 'nested' %}
-                    : {{ category.lvl }}
-                {% else %}
-                    [{{category.products|length}}]
+                    :lvl-{{ category.lvl }}
+                {% else %} 
+                    [{{category.productsCount}}]                
                 {% endif %}
             </a>
+
+            {{ render(controller(
+                'App\\Controller\\DefaultController::getProducts',{'categoryId':category.id}))
+            }}
+            {#
+
             
             {% if category.products and category.products|length > 0 %}
             <ul>
@@ -29,10 +40,11 @@
                     <li> <a href={{ path('product', {id:product.id}) }}>{{ product.name }}</a> </li>
                 {% endfor %}
             </ul>
-            {% endif %}
             
+            {% endif %}
+            #}
         </div>
-        
+        {% endif %}
     {% endfor %} 
 
 {% endblock %}

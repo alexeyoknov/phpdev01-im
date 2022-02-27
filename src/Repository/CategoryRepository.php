@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +21,33 @@ class CategoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Category::class);
     }
+
+    /**
+    * @return Category[] Returns an array of Category objects
+    */
+    public function findAll()
+    {
+        
+        //return parent::findAll();
+        
+        $em = $this->getEntityManager();
+
+        return $em->createQueryBuilder()
+            ->select(
+                "c.id as id, c.name as name, c.created as created, c.active as active,
+                 c.updated as updated, c2.name as parentName, c2.id as sid,
+                 CONCAT(COALESCE(CONCAT(c2.name,'.'),''),COALESCE(c.name,'')) as p,
+                 count(pr.id) as productsCount")
+            ->from("App\Entity\Category", "c")
+            ->leftJoin(Category::class,'c2','WITH','c2.id = c.Parent')
+            ->leftJoin(Product::class,'pr','WITH','pr.Category = c.id')
+            ->groupBy("c.id")
+            ->orderBy('p', 'ASC')
+            ->getQuery()
+            ->getScalarResult()
+            //->getSQL()
+            ;
+    }    
 
     // /**
     //  * @return Category[] Returns an array of Category objects

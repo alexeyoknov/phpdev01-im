@@ -36,6 +36,7 @@ class DefaultController extends AbstractController
         $cr = $em->getRepository($this->getTableType()['category']);
 
         $categories = $cr->findAll();
+        //\var_dump($categories); exit;
 
         return $this->render('default/index.html.twig', [
             'categories' => $categories,
@@ -63,6 +64,16 @@ class DefaultController extends AbstractController
         ]);
     } 
     
+    public function getProducts(int $categoryId, EntityManagerInterface $em)
+    {
+        
+        $products = $em->getRepository($this->getTableType()['category'])->findOneBy(['id'=>$categoryId]);
+
+        return $this->render('default/products.html.twig', [
+            'products'=>$products->getProducts()
+        ]);
+    } 
+
     public function getCategories(EntityManagerInterface $em,$parent=null)
     {
         $categories = $em->getRepository($this->getTableType()['category'])->findBy(['active'=>true, 'Parent'=>$parent]);

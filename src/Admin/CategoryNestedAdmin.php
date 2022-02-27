@@ -53,7 +53,7 @@ final class CategoryNestedAdmin extends AbstractAdmin
         $form
             //->add('id')
             ->add('name')
-            ->add('parent')
+            ->add('Parent')
             //->add('lft')
             //->add('lvl')
             //->add('rgt')
